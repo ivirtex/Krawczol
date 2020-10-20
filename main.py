@@ -37,5 +37,5 @@ class EchoBot(Client):
                       thread_type=thread_type)
             self.setTypingStatus(fbchat.TypingStatus.STOPPED, thread_id=thread_id, thread_type=thread_type)
 
-client = EchoBot('vabeve2984@beiop.com', 'jp2gmd')
+client = EchoBot('akrawczyk69420@gmail.com', 'janeczek123')
 client.listen()
