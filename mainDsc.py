@@ -92,7 +92,7 @@ async def baza(ctx):
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send(round(client.latency * 1000)" ms")
+    await ctx.send(round(client.latency * 1000) + " ms")
 
 # @client.event
 # async def on_error(event, *args, **kwargs):
