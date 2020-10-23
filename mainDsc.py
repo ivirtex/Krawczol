@@ -5,7 +5,6 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from chatterbot import filters
 from h import dscToken
-from dotenv import load_dotenv
 
 chatbot = ChatBot("Adrian Krawczyk",
                   filters = [filters.get_recent_repeated_responses],
