@@ -79,8 +79,8 @@ async def on_message(message):
     if 'happy birthday' in message.content.lower():
         await message.channel.send('Happy Birthday! 🎈🎉')
 
-@bot.command(name="baza")
-async def baza1(ctx):
+@bot.command()
+async def baza(ctx):
     msg = ''
     for x in range(0, 100):
         msg += '['
@@ -89,6 +89,10 @@ async def baza1(ctx):
         msg += '\n'
 
     await ctx.send(msg)
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send(round(client.latency * 1000)" ms")
 
 # @client.event
 # async def on_error(event, *args, **kwargs):
