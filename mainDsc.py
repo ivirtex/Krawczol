@@ -1,10 +1,10 @@
-import os
-
 import discord
+import time
 from discord.ext import commands
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from chatterbot import filters
+from h import dscToken
 from dotenv import load_dotenv
 
 chatbot = ChatBot("Adrian Krawczyk",
@@ -29,10 +29,6 @@ conversation = [
 
 trainer.train(conversation)
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
-
 client = discord.Client()
 bot = commands.Bot(command_prefix='!')
 
@@ -56,13 +52,13 @@ bot = commands.Bot(command_prefix='!')
 @client.event
 async def on_ready():
     for guild in client.guilds:
-        if guild.name == GUILD:
-            break
+        # if guild.name == GUILD:
+        #     break
 
-    print(
-        f'{client.user} is connected to the following guild:\n'
-        f'{guild.name}(id: {guild.id})'
-    )
+        print(
+            f'{client.user} is connected to the following guild:\n'
+            f'{guild.name}(id: {guild.id})'
+        )
 
 @client.event
 async def on_member_join(member):
@@ -76,18 +72,31 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    time.sleep(1)
     await message.channel.send(chatbot.get_response(message.content))
 
+    time.sleep(1)
     if 'happy birthday' in message.content.lower():
         await message.channel.send('Happy Birthday! 🎈🎉')
 
-@client.event
-async def on_error(event, *args, **kwargs):
-    with open('err.log', 'a') as f:
-        if event == 'on_message':
-            f.write(f'Unhandled message: {args[0]}\n')
-        else:
-            raise
+@bot.command(name="baza")
+async def baza1(ctx):
+    msg = ''
+    for x in range(0, 100):
+        msg += '['
+        msg += str(chatbot.storage.get_random())
+        msg += ']'
+        msg += '\n'
 
+    await ctx.send(msg)
 
-client.run(TOKEN)
+# @client.event
+# async def on_error(event, *args, **kwargs):
+#     with open('err.log', 'a') as f:
+#         if event == 'on_message':
+#             f.write(f'Unhandled message: {args[0]}\n')
+#         else:
+#             raise
+#
+
+client.run(dscToken)
