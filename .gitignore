@@ -1,3 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 h.py
+db.sqlite3
+.idea/dataSources/
+__pycache__/
+sentence_tokenizer.pickle
