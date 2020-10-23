@@ -29,7 +29,7 @@ conversation = [
 trainer.train(conversation)
 
 client = discord.Client()
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='$')
 
 # class CustomClient(discord.Client):
 #     async def on_ready(self):
@@ -93,13 +93,20 @@ async def baza(ctx):
 async def ping(ctx):
     await ctx.send(round(client.latency * 1000) + " ms")
 
-# @client.event
-# async def on_error(event, *args, **kwargs):
-#     with open('err.log', 'a') as f:
-#         if event == 'on_message':
-#             f.write(f'Unhandled message: {args[0]}\n')
-#         else:
-#             raise
-#
+@bot.command()
+async def test(ctx, arg):
+    await ctx.send(arg)
+
+@client.event
+async def on_error(event, *args, **kwargs):
+    with open('err.log', 'a') as f:
+        if event == 'on_message':
+            f.write(f'Unhandled message: {args[0]}\n')
+        else:
+            raise
+
+@client.event
+async def on_command_error(ctx, error):
+    await ctx.send(f'Error. Try !help ({error})')
 
 client.run(dscToken)
