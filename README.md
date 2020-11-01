@@ -1,2 +1,2 @@
 # Krawczol
-Chat bot based on chatterbot + fbchat
+Chatbot based on Chatterbot + Fbchat
